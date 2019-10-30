@@ -10,7 +10,7 @@ docker run -it --rm --privileged --name hassio-telegraf \
 	-v "$(pwd)":/docker \
 	hassioaddons/build-env:latest \
 	--target telegraf \
-	--tag-latest \
+	--git \
 	--push \
 	--all \
 	--image "sabuto/{arch}-hassio-telegraf" \
