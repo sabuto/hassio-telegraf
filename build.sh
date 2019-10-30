@@ -1,12 +1,11 @@
 set -ev
-docker run -it --rm --privileged --name hassio-telegraf \
+docker run --rm --privileged \
         -v ~/.docker:/root/.docker \
-	-v "$(pwd)":/docker \
-	hassioaddons/build-env:latest \
-	--target telegraf \
+	-v "$(pwd)":/data \
+	homeassistant/amd64-builder \
+	-t telegraf \
 	--git \
 	--all \
-	--image "sabuto/{arch}-hassio-telegraf" \
-	--from "homeassistant/{arch}-base" \
-	--author "Robert Dunne <robe_dunne@hotmail.com" \
-	--doc-url "${GITHUB_URL}"
+	--release-tag \
+	--test \
+	--image "sabuto/{arch}-hassio-telegraf"
