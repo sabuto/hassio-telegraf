@@ -1,0 +1,35 @@
+{
+  "name": "Telegraf",
+  "version": "dev",
+  "slug": "hassio_telegraf",
+  "description" : "An addon to add telegraf to hassio",
+  "url" : "https://github.com/Sabuto/hassio-telegraf",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "before",
+  "boot": "auto",
+  "hassio_api": true,
+  "hassio_role": "default",
+  "auth_api": true,
+  "docker_api": true,
+  "host_network": true,
+  "host_pid": true,
+  "apparmor": false,
+  "full_access" : true,
+  "options": {
+    "influxDB" : "http://a0d7b954-influxdb:8086",
+    "influx_db" : "telegraf",
+    "influx_user" : "telegraf",
+    "influx_pw" : "telegraf",
+    "retention_policy" : "day",
+    "monitor_docker" : false
+  },
+  "schema": {
+    "influxDB" : "str",
+    "influx_db" : "str",
+    "retention_policy" : "str",
+    "influx_user" : "str",
+    "influx_pw" : "str",
+    "monitor_docker" : "bool"
+  },
+  "ports" : {}
+}
