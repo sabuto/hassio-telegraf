@@ -8,5 +8,3 @@ docker run -it --rm --privileged --name hassio-telegraf \
 	--all \
 	--from "homeassistant/{arch}-base \
 	--author "Robert Dunne <robe_dunne@hotmail.com"
-
-echo "Local Docker Build Successful"
