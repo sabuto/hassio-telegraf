@@ -5,18 +5,13 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0
 fi
 
-docker run -it --rm --privileged --name hassio-telegraf \
+docker run --rm --privileged \
         -v ~/.docker:/root/.docker \
-	-v "$(pwd)":/docker \
-	hassioaddons/build-env:latest \
+	-v "$(pwd)":/data \
+	homeassistant/amd64-builder \
 	--target telegraf \
 	--git \
-	--push \
 	--all \
-	--image "sabuto/{arch}-hassio-telegraf" \
-	--from "homeassistant/{arch}-base" \
-	--author "Robert Dunne <robe_dunne@hotmail.com" \
-	--doc-url "${GITHUB_URL}" \
-	--login "${DOCKER_USERNAME}" \
-	--password "${DOCKER_PASSWORD}" \
-	--parallel
+	--release-tag \
+	--docker-login \
+	--image "sabuto/{arch}-hassio-telegraf"
