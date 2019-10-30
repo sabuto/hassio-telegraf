@@ -6,5 +6,5 @@ docker run -it --rm --privileged --name hassio-telegraf \
 	--target hassio-telegraf \
 	--git \
 	--all \
-	--from "homeassistant/{arch}-base \
+	--from "homeassistant/{arch}-base" \
 	--author "Robert Dunne <robe_dunne@hotmail.com"
