@@ -1,9 +1,9 @@
 set -ev
 docker run -it --rm --privileged --name hassio-telegraf \
         -v ~/.docker:/root/.docker \
-	-v "$(pwd)"/telegraf:/docker \
+	-v "$(pwd)":/docker \
 	hassioaddons/build-env:latest \
-	--target hassio-telegraf \
+	--target telegraf \
 	--git \
 	--all \
 	--from "homeassistant/{arch}-base" \
