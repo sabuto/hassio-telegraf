@@ -5,6 +5,7 @@ services:
 
 before_install:
   - chmod +x build.sh
+  - chmod +x dist.sh
 
 jobs:
   include:
