@@ -1,6 +1,5 @@
 set -ev
 docker run -it --rm --privileged --name hassio-telegraf \
-        -v ~/.docker:/root/.docker \
 	-v "$(pwd)":/docker \
 	hassioaddons/build-env:latest \
 	--repository https://github.com/Sabuto/hassio-telegraf \
