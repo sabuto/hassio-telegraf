@@ -6,5 +6,6 @@ docker run -it --rm --privileged --name hassio-telegraf \
 	--target telegraf \
 	--git \
 	--all \
+	--image "sabuto/{arch}-hassio-telegraf" \
 	--from "homeassistant/{arch}-base" \
 	--author "Robert Dunne <robe_dunne@hotmail.com"
