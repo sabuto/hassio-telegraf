@@ -7,5 +7,4 @@ docker run --rm --privileged \
 	-v "$(pwd)":/data \
 	homeassistant/amd64-builder \
 	-t telegraf \
-	--all \
-	--image "sabuto/{arch}-hassio-telegraf"
+	--all 
