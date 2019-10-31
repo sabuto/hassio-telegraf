@@ -5,11 +5,13 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0
 fi
 
+git clone "${DOCKER_CREDS}"  Sabuto/.docker
+
 docker pull homeassistant/amd64-builder
 
 docker run --rm --privileged \
 	-v /var/run/docker.sock:/var/run/docker.sock \
-        -v "${DOCKER_CREDS}":/root/.docker \
+        -v /Sabuto/.docker:/root/.docker \
 	-v "$(pwd)":/data \
 	homeassistant/amd64-builder \
 	--target telegraf \
