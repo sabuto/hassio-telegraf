@@ -11,7 +11,7 @@ docker pull homeassistant/amd64-builder
 
 docker run --rm --privileged \
 	-v /var/run/docker.sock:/var/run/docker.sock \
-        -v /Sabuto/.docker:/root/.docker \
+        -v /home/travis/.docker:/root/.docker \
 	-v "$(pwd)":/data \
 	homeassistant/amd64-builder \
 	--target telegraf \
