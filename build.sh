@@ -6,6 +6,5 @@ docker run --rm --privileged \
 	-t telegraf \
 	--git \
 	--all \
-	--release-tag \
 	--test \
 	--image "sabuto/{arch}-hassio-telegraf"
