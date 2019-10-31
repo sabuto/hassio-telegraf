@@ -5,13 +5,14 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0
 fi
 
+docker pull homeassistant/amd64-builder
+
 docker run --rm --privileged \
+	-v /var/run/docker.sock:/var/run/docker.sock
         -v ~/.docker:/root/.docker \
 	-v "$(pwd)":/data \
 	homeassistant/amd64-builder \
 	--target telegraf \
-	--git \
 	--all \
 	--release-tag \
-	--docker-login \
-	--image "sabuto/{arch}-hassio-telegraf"
+	--docker-login
