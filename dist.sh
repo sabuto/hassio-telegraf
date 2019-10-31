@@ -5,7 +5,7 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0
 fi
 
-git clone "${DOCKER_CREDS}"  Sabuto/.docker
+docker login -u  "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
 docker pull homeassistant/amd64-builder
 
@@ -16,5 +16,4 @@ docker run --rm --privileged \
 	homeassistant/amd64-builder \
 	--target telegraf \
 	--all \
-	--release-tag \
-	--docker-login
+	--release-tag
