@@ -16,8 +16,6 @@ EXPOSE 8092/udp 8094 8125/udp
 COPY run.sh /
 RUN chmod a+x /run.sh
 COPY telegraf.conf /etc/telegraf/
-COPY telegraf_docker.conf /etc/telegraf/
 RUN chmod a+x /etc/telegraf/telegraf.conf
-RUN chmod a+x /etc/telegraf/telegraf_docker.conf
 
 CMD [ "/run.sh" ]
