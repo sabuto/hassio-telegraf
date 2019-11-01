@@ -1,14 +1,5 @@
 #!/usr/bin/env bashio
 
-if bashio::config.false 'monitor_docker'; then
-  bashio::log.info "Using standard config file (no docker)"
-  rm /etc/telegraf/telegraf_docker.conf
-else
-  bashio::require.unprotected
-  bashio::log.info "Monitoring docker, moving fikles around!"
-  rm /etc/telegraf/telegraf.conf && mv /etc/telegraf/telegraf_docker.conf /etc/telegraf/telegraf.conf
-fi
-
 readonly CONFIG="/etc/telegraf/telegraf.conf"
 
 INFLUX_SERVER=$(bashio::config 'influxDB')
@@ -27,7 +18,11 @@ sed -i "s,INFLUX_PW,${INFLUX_PW},g" $CONFIG
 
 sed -i "s,RETENTION,${RETENTION},g" $CONFIG
 
-bashio::log.info "Influx Server: ${INFLUX_SERVER}"
-bashio::log.info "Influx DB: ${INFLUX_DB}"
-
+if bashio::config.true 'monitor_docker'; then
+  {
+    echo "[[inputs.docker]]"
+    echo "  endpoint = 'unix:///var/run/docker.sock'"
+    echo "  timeout = '5s'"
+  } >> $CONFIG
+fi
 telegraf
