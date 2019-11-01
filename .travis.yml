@@ -13,6 +13,6 @@ jobs:
       script:
         - $TRAVIS_BUILD_DIR/build.sh
     - stage: Deploys Docker Images to Docker Hub
-      if: type != pull_request AND (branch = master AND tag IS present)
+      if: type != pull_request AND (branch = master OR tag IS present)
       script:
         - $TRAVIS_BUILD_DIR/dist.sh
