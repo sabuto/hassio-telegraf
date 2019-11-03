@@ -21,8 +21,10 @@
     "influx_user" : "telegraf",
     "influx_pw" : "telegraf",
     "retention_policy" : "day",
-    "monitor_docker" : false,
-    "docker_timeout" : "5s",
+    "docker" : {
+      "enabled" : false,
+      "timeout" : "5s"
+    },
     "hdd_temp" : {
       "enabled" : false,
       "devices" : "#"
@@ -34,8 +36,10 @@
     "retention_policy" : "str",
     "influx_user" : "str",
     "influx_pw" : "str",
-    "monitor_docker" : "bool",
-    "docker_timeout" : "str",
+    "docker" : {
+      "enabled" : "bool",
+      "timeout" : "str"
+    },
     "hdd_temp" : {
       "enabled" : "bool",
       "devices" : "str"

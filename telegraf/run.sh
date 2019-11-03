@@ -25,7 +25,7 @@ sed -i "s,INFLUX_PW,${INFLUX_PW},g" $CONFIG
 
 sed -i "s,RETENTION,${RETENTION},g" $CONFIG
 
-if bashio::config.true 'monitor_docker'; then
+if bashio::config.true 'docker.enabled'; then
   bashio::log.info "Updating config for Docker"
   {
     echo "[[inputs.docker]]"
