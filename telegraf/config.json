@@ -22,7 +22,11 @@
     "influx_pw" : "telegraf",
     "retention_policy" : "day",
     "monitor_docker" : false,
-    "docker_timeout": "5s"
+    "docker_timeout" : "5s",
+    "hdd_temp" : {
+      "enabled" : false,
+      "devices" : "#"
+    }
   },
   "schema": {
     "influxDB" : "str",
@@ -31,7 +35,11 @@
     "influx_user" : "str",
     "influx_pw" : "str",
     "monitor_docker" : "bool",
-    "docker_timeout" : "str"
+    "docker_timeout" : "str",
+    "hdd_temp" : {
+      "enabled" : "bool",
+      "devices" : "str"
+    }
   },
   "ports" : {},
   "image" : "sabuto/{arch}-hassio-telegraf"

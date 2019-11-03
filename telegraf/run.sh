@@ -36,6 +36,13 @@ if bashio::config.true 'monitor_docker'; then
   sed -i "s,DOCKER_TIMEOUT,${DOCKER_TIMEOUT},g" $CONFIG
 fi
 
+if bashio::config.true 'hdd_temp.enabled'; then
+  bashio::log.info "Updating config for HDD temp"
+  {
+    echo "[[inputs.hddtemp]]"
+  } >> $CONFIG
+fi
+
 bashio::log.info "Finished updating config, Starting Telegraf"
 
 telegraf
