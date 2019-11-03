@@ -11,7 +11,7 @@ INFLUX_DB=$(bashio::config 'influx_db')
 INFLUX_UN=$(bashio::config 'influx_user')
 INFLUX_PW=$(bashio::config 'influx_pw')
 RETENTION=$(bashio::config 'retention_policy')
-DOCKER_TIMEOUT=$(bashio::config 'docker_timeout')
+DOCKER_TIMEOUT=$(bashio::config 'docker.timeout')
 
 bashio::log.info "Updating config"
 
