@@ -1,5 +1,9 @@
 #!/usr/bin/env bashio
 
+if bashio::config.true 'monitor_docker'; then
+  bashio::require.unprotected
+fi
+
 readonly CONFIG="/etc/telegraf/telegraf.conf"
 
 INFLUX_SERVER=$(bashio::config 'influxDB')
