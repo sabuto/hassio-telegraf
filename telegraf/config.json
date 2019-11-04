@@ -1,6 +1,6 @@
 {
   "name": "Telegraf",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "slug": "hassio_telegraf",
   "description" : "An addon to add telegraf to hassio",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
@@ -25,9 +25,9 @@
       "enabled" : false,
       "timeout" : "5s"
     },
-    "hdd_temp" : {
+    "smart_monitor" : {
       "enabled" : false,
-      "devices" : "#"
+      "timeout" : "30s"
     }
   },
   "schema": {
@@ -40,9 +40,9 @@
       "enabled" : "bool",
       "timeout" : "str"
     },
-    "hdd_temp" : {
+    "smart_monitor" : {
       "enabled" : "bool",
-      "devices" : "str"
+      "timeout" : "str"
     }
   },
   "ports" : {},
