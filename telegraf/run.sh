@@ -1,6 +1,10 @@
 #!/usr/bin/env bashio
 
-if bashio::config.true 'monitor_docker'; then
+if bashio::config.true 'docker.enabled'; then
+  bashio::require.unprotected
+fi
+
+if bashio::config.true 'smart_monitor'; then
   bashio::require.unprotected
 fi
 
@@ -12,6 +16,7 @@ INFLUX_UN=$(bashio::config 'influx_user')
 INFLUX_PW=$(bashio::config 'influx_pw')
 RETENTION=$(bashio::config 'retention_policy')
 DOCKER_TIMEOUT=$(bashio::config 'docker.timeout')
+SMART_TIMEOUT=$(bashio::config 'smart_monitor.timeout')
 
 bashio::log.info "Updating config"
 
@@ -36,11 +41,14 @@ if bashio::config.true 'docker.enabled'; then
   sed -i "s,DOCKER_TIMEOUT,${DOCKER_TIMEOUT},g" $CONFIG
 fi
 
-if bashio::config.true 'hdd_temp.enabled'; then
-  bashio::log.info "Updating config for HDD temp"
+if bashio::config.true 'smart_monitor.enabled'; then
+  bashio::log.info "Updating config for Smart Monitor"
   {
-    echo "[[inputs.hddtemp]]"
+    echo "[[inputs.smart]]"
+    echo "  timeout = 'SMART_TIMEOUT'"
   } >> $CONFIG
+
+  sed -i "s,SMART_TIMEOUT,${SMART_TIMEOUT},g" $CONFIG
 fi
 
 bashio::log.info "Finished updating config, Starting Telegraf"
