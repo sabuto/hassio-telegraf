@@ -1,15 +1,27 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+ARG BUILD_ARCH=amd64
+
 ENV LANG C.UTF-8
 
-RUN echo 'hosts: files dns' >> /etc/nsswitch.conf
+ARG TELEGRAF_VERSION
 
-RUN apk add --no-cache iputils ca-certificates net-snmp-tools procps lm_sensors tzdata smartmontools && update-ca-certificates
-
-ENV TELEGRAF_VERSION=1.12.4
-
-RUN set -ex && apk add --no-cache --virtual .build-deps wget gnupg tar && for key in 05CE15085FC09D18E99EFB22684A14CF2582E0C5 ; do gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || gpg --keyserver pgp.mit.edu --recv-keys "$key" || gpg --keyserver keyserver.pgp.com --recv-keys "$key" ; done && wget --no-verbose https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}-static_linux_amd64.tar.gz.asc && wget --no-verbose https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}-static_linux_amd64.tar.gz && gpg --batch --verify telegraf-${TELEGRAF_VERSION}-static_linux_amd64.tar.gz.asc telegraf-${TELEGRAF_VERSION}-static_linux_amd64.tar.gz && mkdir -p /usr/src /etc/telegraf && tar -C /usr/src -xzf telegraf-${TELEGRAF_VERSION}-static_linux_amd64.tar.gz && chmod +x /usr/src/telegraf*/* && cp -a /usr/src/telegraf*/* /usr/bin/ && rm -rf *.tar.gz* /usr/src /root/.gnupg && apk del .build-deps
+RUN \
+    apt-get update \
+    && apt-get install -y --no-install-recommends iputils-ping snmp procps lm-sensors smartmontools \
+    && ARCH="${BUILD_ARCH}" \
+    && if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; fi \
+    && if [ "${BUILD_ARCH}" = "armv7" ]; then ARCH="armhf"; fi \
+    \
+    && TELEGRAF="$TELEGRAF_VERSION" \
+    && curl -J -L -o /tmp/telegraf.deb \
+        "https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF}-1_${ARCH}.deb"
+    
+    RUN dpkg --install /tmp/telegraf.deb \
+    && rm -rf \
+        /tmp/* \
+        /var/lib/apt/lists/*
 
 EXPOSE 8092/udp 8094 8125/udp
 
