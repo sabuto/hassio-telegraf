@@ -30,6 +30,20 @@ sed -i "s,INFLUX_PW,${INFLUX_PW},g" $CONFIG
 
 sed -i "s,RETENTION,${RETENTION},g" $CONFIG
 
+if bashio::config.true 'kernel.enabled'; then
+  bashio::log.info "Updating config for Kernel"
+  {
+    echo "[[inputs.kernel]]"
+  } >> $CONFIG
+fi
+
+if bashio::config.true 'swap.enabled'; then
+  bashio::log.info "Updaing config for Swap"
+  {
+    echo "[[inputs.swap]]"
+  } >> $CONFIG
+fi
+
 if bashio::config.true 'docker.enabled'; then
   bashio::log.info "Updating config for Docker"
   {
