@@ -1,6 +1,7 @@
 # Telegraf Plugin for Hassio
 
 [![GitHub Release][releases-shield]][releases]
+[![License][license-shield]](LICENSE.md)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
@@ -128,3 +129,4 @@ SOFTWARE.
 [travis-shield]: https://img.shields.io/travis/sabuto/hassio-telegraf
 [releases-shield]: https://img.shields.io/github/v/release/sabuto/hassio-telegraf
 [releases]: https://github.com/sabuto/hassio-telegraf/releases
+[license-shield]: https://img.shields.io/github/license/sabuto/hassio-telegraf
