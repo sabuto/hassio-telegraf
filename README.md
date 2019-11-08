@@ -17,7 +17,9 @@
 I wanted to mention people/repos that i have borrowed code from to make this work and also who have helped me make this work.
 
 First I wanted to say thanks to [@pvizeli](https://github.com/pvizeli). He helped me with regard to building the image. and just the general work he does on a daily basis
+
 Second I want to say thanks to [@Frenck](https://github.com/frenck). He has helped me a lot on Discord getting this addon working when i was running into errors. His addon for influx db helped me migrate this from Alpine to ubuntu also.
+
 Third I want to say thanks to [@Daniel Welch](https://github.com/danielwelch). I looked at his script for travis builds, he did a write up [here](https://danielwelch.github.io/hassio-dev-env.html) that helped me form a basis of my script.
 
 All of these people are amazing!
