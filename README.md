@@ -1,5 +1,16 @@
 # Telegraf Plugin for Hassio
 
+[![GitHub Release][releases-shield]][releases]
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Supports armhf Architecture][armhf-shield]
+![Supports armv7 Architecture][armv7-shield]
+![Supports i386 Architecture][i386-shield]
+
+![Travis Ci][travis-shield]
+[!Github Activity][commits-shield]
+
 This is a very simple hassio plugin that ebnables you to run telegraf on your hassio system, I am still working on this so please bear with me, I am happy to accept PR's
 
 # Installation
@@ -47,11 +58,23 @@ retention_policy
 This is the retention policy to use (again you may need to specify this when setting up the db)
 
 ```bash
-monitor_docker
+docker : {
+  enabled: false
+  timeout: 5s
+}
 ```
 
-This allows you to monitor your docker containers, *PLEASE NOTE: IN ORDER TO DO THIS YOU MUST TURN OFF PROTECTION MODE*
+This allows you to monitor your docker containers, the timeout allows you to specify how long it should try before connection is dropped *PLEASE NOTE: IN ORDER TO DO THIS YOU MUST TURN OFF PROTECTION MODE*
 
+
+```bash
+smart_monitor : {
+  enabled: false
+  timeout : "30s"
+}
+```
+
+This allows you to monitor the temperature of the hard drives
 
 # Known issues
 
@@ -70,3 +93,14 @@ Add PR Template
 Configure more options to edit for the inputs
 
 Configure different outputs (so it doesn't have to be influxDB dependant, would appreciate it if people could reccomend ones they would find useful.)
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
+[commits-shield]: https://img.shields.io/github/commit-activity/y/sabuto/hassio-telegraf?style=plastic
+[commits]: https://github.com/sabuto/hassio-telegraf/commits/master
+[travis-shield]: https://img.shields.io/travis/sabuto/hassio-telegraf
+[release-shield]: https://img.shields.io/github/v/release/sabuto/hassio-telegraf
+[releases]: https://github.com/sabuto/hassio-telegraf/releases
