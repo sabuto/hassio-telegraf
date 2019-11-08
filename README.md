@@ -9,7 +9,7 @@
 ![Supports i386 Architecture][i386-shield]
 
 ![Travis Ci][travis-shield]
-[!Github Activity][commits-shield]
+[!Github Activity][commits-shield]][commits]
 
 This is a very simple hassio plugin that ebnables you to run telegraf on your hassio system, I am still working on this so please bear with me, I am happy to accept PR's
 
@@ -102,5 +102,5 @@ Configure different outputs (so it doesn't have to be influxDB dependant, would 
 [commits-shield]: https://img.shields.io/github/commit-activity/y/sabuto/hassio-telegraf?style=plastic
 [commits]: https://github.com/sabuto/hassio-telegraf/commits/master
 [travis-shield]: https://img.shields.io/travis/sabuto/hassio-telegraf
-[release-shield]: https://img.shields.io/github/v/release/sabuto/hassio-telegraf
+[releases-shield]: https://img.shields.io/github/v/release/sabuto/hassio-telegraf
 [releases]: https://github.com/sabuto/hassio-telegraf/releases
