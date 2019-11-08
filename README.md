@@ -72,6 +72,22 @@ retention_policy
 
 This is the retention policy to use (again you may need to specify this when setting up the db)
 
+```json
+kernel : {
+  enabled: true
+}
+```
+
+This monitors the kernel
+
+```json
+swap : {
+  enabled: true
+}
+```
+
+This monitors the swap usasge
+
 ```bash
 docker : {
   enabled: false

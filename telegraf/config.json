@@ -1,6 +1,6 @@
 {
   "name": "Telegraf",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "slug": "hassio_telegraf",
   "description" : "An addon to add telegraf to hassio",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
@@ -21,6 +21,12 @@
     "influx_user" : "telegraf",
     "influx_pw" : "telegraf",
     "retention_policy" : "day",
+    "kernel" : {
+      "enabled" : true
+    },
+    "swap" : {
+      "enabled" : true
+    },
     "docker" : {
       "enabled" : false,
       "timeout" : "5s"
@@ -36,6 +42,12 @@
     "retention_policy" : "str",
     "influx_user" : "str",
     "influx_pw" : "str",
+    "kernel" : {
+      "enabled" : "bool"
+    },
+    "swap" : {
+      "enabled" : "bool"
+    },
     "docker" : {
       "enabled" : "bool",
       "timeout" : "str"
