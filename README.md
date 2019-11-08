@@ -101,7 +101,7 @@ This allows you to monitor the temperature of the hard drives
 
 Add images to installation steps
 
-Add PR Template
+~~Add PR Template~~
 
 ~~Add Issue Template~~
 
