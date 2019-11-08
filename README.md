@@ -9,7 +9,7 @@
 ![Supports i386 Architecture][i386-shield]
 
 ![Travis Ci][travis-shield]
-[!Github Activity][commits-shield]][commits]
+[![Github Activity][commits-shield]][commits]
 
 This is a very simple hassio plugin that ebnables you to run telegraf on your hassio system, I am still working on this so please bear with me, I am happy to accept PR's
 
