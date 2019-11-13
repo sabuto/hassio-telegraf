@@ -17,6 +17,12 @@ INFLUX_PW=$(bashio::config 'influx_pw')
 RETENTION=$(bashio::config 'retention_policy')
 DOCKER_TIMEOUT=$(bashio::config 'docker.timeout')
 SMART_TIMEOUT=$(bashio::config 'smart_monitor.timeout')
+IPMI_USER=$(bashio::config 'ipmi_sensor.server_user_id')
+IPMI_PASSWORD=$(bashio::config 'ipmi_sensor.server_password')
+IPMI_PROTOCOL=$(bashio::config 'ipmi_sensor.server_protocol')
+IPMI_IP=$(bashio::config 'ipmi_sensor.server_ip')
+IPMI_INTERVAL=$(bashio::config 'ipmi_sensor.interval')
+IPMI_TIMEOUT=$(bashio::config 'ipmi_sensor.timeout')
 
 bashio::log.info "Updating config"
 
@@ -63,6 +69,23 @@ if bashio::config.true 'smart_monitor.enabled'; then
   } >> $CONFIG
 
   sed -i "s,SMART_TIMEOUT,${SMART_TIMEOUT},g" $CONFIG
+fi
+
+if bashio::config.true 'ipmi_sensor.enabled'; then
+  bashio::log.info "Updating config for ipmi sensor"
+  {
+    echo "[[inputs.ipmi_sensor]]"
+    echo "  servers = ['USER_ID:PASSWORD@PROTOCOL(IP)']"
+    echo "  interval = 'INTERVAL'"
+    echo "  timeout = 'TIMEOUT'"
+  } >> $CONFIG
+
+  sed -i "s,USER_ID,${IPMI_USER},g" $CONFIG
+  sed -i "s,PASSWORD,${IPMI_PASSWORD},g" $CONFIG
+  sed -i "s,PROTOCOL,${IPMI_PROTOCOL},g" $CONFIG
+  sed -i "s,IP,${IPMI_IP},g" $CONFIG
+  sed -i "s,INTERVAL,${IPMI_INTERVAL},g" $CONFIG
+  sed -i "s,TIMEOUT,${IPMI_TIMEOUT},g" $CONFIG
 fi
 
 bashio::log.info "Finished updating config, Starting Telegraf"
