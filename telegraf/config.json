@@ -1,6 +1,6 @@
 {
   "name": "Telegraf",
-  "version": "dev",
+  "version": "0.4.2",
   "slug": "hassio_telegraf",
   "description" : "An addon to add telegraf to hassio",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
@@ -75,5 +75,6 @@
       "server_ip" : "str"
     }
   },
-  "ports" : {}
+  "ports" : {},
+  "image" : "sabuto/{arch}-hassio-telegraf"
 }
