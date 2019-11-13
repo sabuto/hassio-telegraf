@@ -1,6 +1,6 @@
 {
   "name": "Telegraf",
-  "version": "0.4.1",
+  "version": "dev",
   "slug": "hassio_telegraf",
   "description" : "An addon to add telegraf to hassio",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
@@ -26,7 +26,7 @@
     },
     "swap" : {
       "enabled" : true
-    },
+    }, 
     "docker" : {
       "enabled" : false,
       "timeout" : "5s"
@@ -34,6 +34,15 @@
     "smart_monitor" : {
       "enabled" : false,
       "timeout" : "30s"
+    },
+    "ipmi_sensor": {
+      "enabled" : false,
+      "interval" : "30s",
+      "timeout" : "20s",
+      "server_user_id" : "user",
+      "server_password" : "password",
+      "server_protocol" : "lan",
+      "server_ip" : "192.168.1.2"
     }
   },
   "schema": {
@@ -55,8 +64,16 @@
     "smart_monitor" : {
       "enabled" : "bool",
       "timeout" : "str"
+    },
+    "ipmi_sensor": {
+      "enabled" : "bool",
+      "interval" : "str",
+      "timeout" : "str",
+      "server_user_id" : "str",
+      "server_password" : "str",
+      "server_protocol" : "str",
+      "server_ip" : "str"
     }
   },
-  "ports" : {},
-  "image" : "sabuto/{arch}-hassio-telegraf"
+  "ports" : {}
 }

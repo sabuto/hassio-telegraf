@@ -9,7 +9,7 @@ ARG TELEGRAF_VERSION
 
 RUN \
     apt-get update \
-    && apt-get install -y --no-install-recommends iputils-ping snmp procps lm-sensors smartmontools \
+    && apt-get install -y --no-install-recommends iputils-ping snmp procps lm-sensors smartmontools ipmitool \
     && ARCH="${BUILD_ARCH}" \
     && if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; fi \
     && if [ "${BUILD_ARCH}" = "armv7" ]; then ARCH="armhf"; fi \
