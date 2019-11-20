@@ -1,4 +1,7 @@
 #!/usr/bin/env bashio
+declare influx_un
+declare inlfux_pw
+declare influx_ret
 bashio::require.unprotected
 
 readonly CONFIG="/etc/telegraf/telegraf.conf"
@@ -18,6 +21,34 @@ IPMI_INTERVAL=$(bashio::config 'ipmi_sensor.interval')
 IPMI_TIMEOUT=$(bashio::config 'ipmi_sensor.timeout')
 
 bashio::log.info "Updating config"
+
+if bashio::var.has_value "${INFLUX_UN}"; then
+    influx_un="  username='INFLUX_UN'"
+else
+    influx_un="  # INFLUX_UN"
+fi
+
+if bashio::var.has_value "{INFLUX_PW}"; then
+    influx_pw="  password='INFLUX_PW'"
+else
+    influx_pw="  # INFLUX_PW"
+fi
+
+if bashio::var.has_value "${RETENTION}"; then
+    influx_ret="  retention_policy='RETENTION'"
+else
+    influx_ret="  # RETENTION"
+fi
+
+{
+  echo "[[outputs.influxdb]]"
+  echo "  urls = ['http://a0d7b954-influxdb:8086']"
+  echo "  database = \"TELEGRAF_DB\""
+  echo "  {$influx_ret}"
+  echo "  timeout = \"5s\""
+  echo "  {$influx_un}"
+  echo "  {$influx_pw}"
+} >> $CONFIG
 
 sed -i "s,http://a0d7b954-influxdb:8086,${INFLUX_SERVER},g" $CONFIG
 

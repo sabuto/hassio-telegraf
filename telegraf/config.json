@@ -48,9 +48,9 @@
   "schema": {
     "influxDB" : "str",
     "influx_db" : "str",
-    "retention_policy" : "str",
-    "influx_user" : "str",
-    "influx_pw" : "str",
+    "retention_policy" : "str?",
+    "influx_user" : "str?",
+    "influx_pw" : "str?",
     "kernel" : {
       "enabled" : "bool"
     },
