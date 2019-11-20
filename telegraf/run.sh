@@ -1,12 +1,5 @@
 #!/usr/bin/env bashio
-
-if bashio::config.true 'docker.enabled'; then
-  bashio::require.unprotected
-fi
-
-if bashio::config.true 'smart_monitor'; then
-  bashio::require.unprotected
-fi
+bashio::require.unprotected
 
 readonly CONFIG="/etc/telegraf/telegraf.conf"
 
@@ -75,7 +68,7 @@ if bashio::config.true 'ipmi_sensor.enabled'; then
   bashio::log.info "Updating config for ipmi sensor"
   {
     echo "[[inputs.ipmi_sensor]]"
-    echo "  servers = ['USER_ID:PASSWORD@PROTOCOL(IP)']"
+    echo "  servers = [\"USER_ID:PASSWORD@PROTOCOL(IP)\"]"
     echo "  interval = 'INTERVAL'"
     echo "  timeout = 'TIMEOUT'"
   } >> $CONFIG
