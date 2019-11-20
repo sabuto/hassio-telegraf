@@ -18,9 +18,6 @@
   "options": {
     "influxDB" : "http://a0d7b954-influxdb:8086",
     "influx_db" : "telegraf",
-    "influx_user" : "telegraf",
-    "influx_pw" : "telegraf",
-    "retention_policy" : "day",
     "kernel" : {
       "enabled" : true
     },

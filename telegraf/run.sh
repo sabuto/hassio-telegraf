@@ -44,10 +44,10 @@ fi
   echo "[[outputs.influxdb]]"
   echo "  urls = ['http://a0d7b954-influxdb:8086']"
   echo "  database = \"TELEGRAF_DB\""
-  echo "  {$influx_ret}"
-  echo "  timeout = \"5s\""
-  echo "  {$influx_un}"
-  echo "  {$influx_pw}"
+  echo "  ${influx_ret}"
+  echo "  timeout = '5s'"
+  echo "  ${influx_un}"
+  echo "  ${influx_pw}"
 } >> $CONFIG
 
 sed -i "s,http://a0d7b954-influxdb:8086,${INFLUX_SERVER},g" $CONFIG
