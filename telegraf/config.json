@@ -1,8 +1,8 @@
 {
   "name": "Telegraf",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "slug": "hassio_telegraf",
-  "description" : "An addon to add telegraf to hassio",
+  "description" : "An addon to add telegraf to hassio.",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "before",
@@ -16,8 +16,12 @@
   "apparmor": false,
   "full_access" : true,
   "options": {
-    "influxDB" : "http://a0d7b954-influxdb:8086",
-    "influx_db" : "telegraf",
+    "hostname" : "test",
+    "influxDB" : {
+      "enabled": true,
+      "url": "http://a0d7b954-influxdb:8086",
+      "db": "telegraf"
+    },
     "kernel" : {
       "enabled" : true
     },
@@ -40,14 +44,25 @@
       "server_password" : "password",
       "server_protocol" : "lan",
       "server_ip" : "192.168.1.2"
+    },
+    "influxDBv2": {
+      "enabled": false,
+      "url": "http://127.0.0.1:9999",
+      "organization": "",
+      "token": "",
+      "bucket": ""
     }
   },
   "schema": {
-    "influxDB" : "str",
-    "influx_db" : "str",
-    "retention_policy" : "str?",
-    "influx_user" : "str?",
-    "influx_pw" : "str?",
+    "hostname" : "str",
+    "influxDB" : {
+      "enabled": "bool",
+      "url": "str",
+      "db": "str",
+      "retention_policy" : "str?",
+      "username" : "str?",
+      "password" : "str?"
+    },
     "kernel" : {
       "enabled" : "bool"
     },
@@ -70,6 +85,13 @@
       "server_password" : "str",
       "server_protocol" : "str",
       "server_ip" : "str"
+    },
+    "influxDBv2": {
+      "enabled": "bool",
+      "url": "str",
+      "organization": "str",
+      "token": "str",
+      "bucket": "str"
     }
   },
   "ports" : {},

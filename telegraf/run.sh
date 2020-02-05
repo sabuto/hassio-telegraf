@@ -1,15 +1,21 @@
 #!/usr/bin/env bashio
 declare influx_un
-declare inlfux_pw
+declare influx_pw
 declare influx_ret
+declare hostname
 bashio::require.unprotected
 
 readonly CONFIG="/etc/telegraf/telegraf.conf"
 
-INFLUX_SERVER=$(bashio::config 'influxDB')
-INFLUX_DB=$(bashio::config 'influx_db')
-INFLUX_UN=$(bashio::config 'influx_user')
-INFLUX_PW=$(bashio::config 'influx_pw')
+HOSTNAME=$(bashio::config 'hostname')
+INFLUX_SERVER=$(bashio::config 'influxDB.url')
+INFLUX_DB=$(bashio::config 'influxDB.db')
+INFLUX_UN=$(bashio::config 'influxDB.username')
+INFLUX_PW=$(bashio::config 'influxDB.password')
+INFLUXDBV2_URL=$(bashio::config 'influxDBv2.url')
+INFLUXDBV2_TOKEN=$(bashio::config 'influxDBv2.token')
+INFLUXDBV2_ORG=$(bashio::config 'influxDBv2.organization')
+INFLUXDBV2_BUCKET=$(bashio::config 'influxDBv2.bucket')
 RETENTION=$(bashio::config 'retention_policy')
 DOCKER_TIMEOUT=$(bashio::config 'docker.timeout')
 SMART_TIMEOUT=$(bashio::config 'smart_monitor.timeout')
@@ -22,43 +28,68 @@ IPMI_TIMEOUT=$(bashio::config 'ipmi_sensor.timeout')
 
 bashio::log.info "Updating config"
 
-if bashio::var.has_value "${INFLUX_UN}"; then
-    influx_un="  username='INFLUX_UN'"
+if bashio::var.has_value "${HOSTNAME}"; then
+  hostname="hostname = 'HOSTNAME'"
 else
-    influx_un="  # INFLUX_UN"
-fi
-
-if bashio::var.has_value "{INFLUX_PW}"; then
-    influx_pw="  password='INFLUX_PW'"
-else
-    influx_pw="  # INFLUX_PW"
-fi
-
-if bashio::var.has_value "${RETENTION}"; then
-    influx_ret="  retention_policy='RETENTION'"
-else
-    influx_ret="  # RETENTION"
+  hostname=" hostname = ''"
 fi
 
 {
-  echo "[[outputs.influxdb]]"
-  echo "  urls = ['http://a0d7b954-influxdb:8086']"
-  echo "  database = \"TELEGRAF_DB\""
-  echo "  ${influx_ret}"
-  echo "  timeout = '5s'"
-  echo "  ${influx_un}"
-  echo "  ${influx_pw}"
+  echo "[agent]"
+  echo "  interval = \"10s\""
+  echo "  round_interval = true"
+  echo "  metric_batch_size = 1000"
+  echo "  metric_buffer_limit = 10000"
+  echo "  collection_jitter = \"0s\""
+  echo "  flush_interval = \"10s\""
+  echo "  flush_jitter = \"0s\""
+  echo "  precision = \"\""
+  echo "  ${hostname}"
+  echo "  omit_hostname = false"
 } >> $CONFIG
 
-sed -i "s,http://a0d7b954-influxdb:8086,${INFLUX_SERVER},g" $CONFIG
+sed -i "s,HOSTNAME,${HOSTNAME},g" $CONFIG
 
-sed -i "s,TELEGRAF_DB,${INFLUX_DB},g" $CONFIG
+if bashio::config.true 'influxDB.enabled'; then
+  if bashio::var.has_value "${INFLUX_UN}"; then
+    influx_un="  username='INFLUX_UN'"
+  else
+    influx_un="  # INFLUX_UN"
+  fi
 
-sed -i "s,INFLUX_UN,${INFLUX_UN},g" $CONFIG
+  if bashio::var.has_value "${INFLUX_PW}"; then
+    influx_pw="  password='INFLUX_PW'"
+  else
+    influx_pw="  # INFLUX_PW"
+  fi
 
-sed -i "s,INFLUX_PW,${INFLUX_PW},g" $CONFIG
+  if bashio::var.has_value "${RETENTION}"; then
+    influx_ret="  retention_policy='RETENTION'"
+  else
+    influx_ret="  # RETENTION"
+  fi
 
-sed -i "s,RETENTION,${RETENTION},g" $CONFIG
+  {
+    echo "[[outputs.influxdb]]"
+    echo "  urls = ['http://a0d7b954-influxdb:8086']"
+    echo "  database = \"TELEGRAF_DB\""
+    echo "  ${influx_ret}"
+    echo "  timeout = '5s'"
+    echo "  ${influx_un}"
+    echo "  ${influx_pw}"
+  } >> $CONFIG
+
+  sed -i "s,http://a0d7b954-influxdb:8086,${INFLUX_SERVER},g" $CONFIG
+
+  sed -i "s,TELEGRAF_DB,${INFLUX_DB},g" $CONFIG
+
+  sed -i "s,INFLUX_UN,${INFLUX_UN},g" $CONFIG
+
+  sed -i "s,INFLUX_PW,${INFLUX_PW},g" $CONFIG
+
+  sed -i "s,RETENTION,${RETENTION},g" $CONFIG
+
+fi
 
 if bashio::config.true 'kernel.enabled'; then
   bashio::log.info "Updating config for Kernel"
@@ -110,6 +141,22 @@ if bashio::config.true 'ipmi_sensor.enabled'; then
   sed -i "s,IP,${IPMI_IP},g" $CONFIG
   sed -i "s,INTERVAL,${IPMI_INTERVAL},g" $CONFIG
   sed -i "s,TIMEOUT,${IPMI_TIMEOUT},g" $CONFIG
+fi
+
+if bashio::config.true 'influxDBv2.enabled'; then
+  bashio::log.info "Updating config for influxdbv2"
+  {
+    echo "[[outputs.influxdb_v2]]"
+    echo "  urls = [\"INFLUXv2_URL\"]"
+    echo "  token = 'INFLUX_TOKEN'"
+    echo "  organization = 'INFLUX_ORG'"
+    echo "  bucket = 'INFLUX_BUCKET'"
+  } >> $CONFIG
+
+  sed -i "s,INFLUXv2_URL,${INFLUXDBV2_URL},g" $CONFIG
+  sed -i "s,INFLUX_TOKEN,${INFLUXDBV2_TOKEN},g" $CONFIG
+  sed -i "s,INFLUX_ORG,${INFLUXDBV2_ORG},g" $CONFIG
+  sed -i "s,INFLUX_BUCKET,${INFLUXDBV2_BUCKET},g" $CONFIG
 fi
 
 bashio::log.info "Finished updating config, Starting Telegraf"
