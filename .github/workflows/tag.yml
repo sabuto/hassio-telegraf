@@ -1,0 +1,57 @@
+name: if release
+
+on:
+  push:
+    branches: [master]
+    tags:
+      - 0.*
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: shellcheck
+        run: shellcheck telegraf/run.sh
+      - name: build docker files
+        run: docker run --rm --privileged	-v /var/run/docker.sock:/var/run/docker.sock -v ~/.docker:/root/.docker -v "$(pwd)":/data homeassistant/amd64-builder	-t telegraf	--all	--test
+      - name: deploy docker files
+        if: github.event_name != 'pull_request'
+        run: docker run --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /home/travis/.docker:/root/.docker -v "$(pwd)":/data homeassistant/amd64-builder --target telegraf --all --release-tag --docker-user sabuto --docker-password ${{ secrets.DOCKER_PASSWORD }}
+
+  push-config-to-main-repo:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: main
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          path: main
+      - name: secondary
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          path: secondary
+          repository: sabuto/hassio-repo-dev
+
+      - name: setup local env
+        run: |
+          \cp -Rv main/telegraf/config.json secondary/telegraf/config.json
+          cd secondary
+          git config --local user.email "robe_dunne@hotmail.com"
+          git config --local user.name "sabuto"
+          git add .
+          git commit -m "Add changes"
+
+      - name: copy config to repo dir in case of change
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_PSA }}
+          repository: sabuto/hassio-repo-dev
+          directory: secondary
