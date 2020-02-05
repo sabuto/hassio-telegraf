@@ -1,0 +1,15 @@
+name: Docker build and shellcheck
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: shellcheck
+        run: shellcheck telegraf/run.sh
+      - name: build docker files
+        run: docker run --rm --privileged	-v /var/run/docker.sock:/var/run/docker.sock -v ~/.docker:/root/.docker -v "$(pwd)":/data homeassistant/amd64-builder	-t telegraf	--all	--test
