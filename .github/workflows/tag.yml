@@ -49,6 +49,7 @@ jobs:
           git config --local user.name "sabuto"
           git add .
           git commit -m "Add changes"
+        continue-on-error: true
 
       - name: copy config to repo dir in case of change
         uses: ad-m/github-push-action@master
