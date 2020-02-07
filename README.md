@@ -43,75 +43,75 @@ Scroll down to Rob's Repo and install Telegraf. Give it a few minutes to install
 
 The config is simple but there are some things to consider,
 
+```yaml
+hostname: ''
+```
+This allows you set your hostname to something easy
+
 You must have a running influxDB instance (the hassio plugin works)
 
-```bash
-"influxDB" : {
-  "enabled": true,
-  "url": "http://a0d7b954-influxdb:8086",
-  "db": "telegraf",
-  "retention_policy" : "optional",
-  "username" : "optional",
-  "password" : "optional"
-},
+```yaml
+influxDB:
+  enabled: true,
+  url: 'http://a0d7b954-influxdb:8086'
+  db: telegraf
+  retention_policy: optional
+  username: optional
+  password: optional
 ```
 This has been moved into it's own block as that made sense with the other options, some have been made optional (previous versions)
 
 
-```bash
-kernel : {
+```yaml
+kernel:
   enabled: true
-}
 ```
 
 This monitors the kernel
 
-```bash
-swap : {
+```yaml
+swap:
   enabled: true
-}
 ```
 
 This monitors the swap usasge
 
-```bash
-docker : {
+```yaml
+docker:
   enabled: false
   timeout: 5s
-}
 ```
 
-```bash
-smart_monitor : {
+This monitors the docker containers
+
+```yaml
+smart_monitor:
   enabled: false
-  timeout : "30s"
-}
+  timeout: 30s
 ```
 
 This allows you to monitor the temperature of the hard drives
 
-```bash
-impi_sensor : {
-  "enabled" : false,
-  "interval" : "30s",
-  "timeout" : "20s",
-  "server_user_id" : "user",
-  "server_password" : "password",
-  "server_protocol" : "lan",
-  "server_ip" : "192.168.1.2"
-}
+```yaml
+impi_sensor:
+  enabled: false
+  interval: 30s
+  timeout: 20s
+  server_user_id: user
+  server_password: password
+  server_protocol: lan
+  server_ip: 192.168.1.2
 ```
 
 This allows you to enable the impi settings.
 
-```bash
-"influxDBv2": {
-  "enabled": false,
-  "url": "http://127.0.0.1:9999",
-  "organization": "",
-  "token": "",
-  "bucket": ""
-}
+```yaml
+influxDBv2:
+  enabled: false
+  url: 'http://127.0.0.1:9999'
+  organization: ''
+  token: ''
+  bucket: ''
 ```
 
 This allows you to use InfluxDBv2 if you have an instance running.
