@@ -85,6 +85,13 @@ docker:
 This monitors the docker containers
 
 ```yaml
+thermal:
+  enabled: false
+```
+
+This allows you to monitor the temperature of the CPU
+
+```yaml
 smart_monitor:
   enabled: false
   timeout: 30s
