@@ -32,6 +32,9 @@
       "enabled" : false,
       "timeout" : "5s"
     },
+    "thermal" : {
+      "enabled" : false
+    },
     "smart_monitor" : {
       "enabled" : false,
       "timeout" : "30s"
@@ -72,6 +75,9 @@
     "docker" : {
       "enabled" : "bool",
       "timeout" : "str"
+    },
+    "thermal" : {
+      "enabled" : "bool"
     },
     "smart_monitor" : {
       "enabled" : "bool",

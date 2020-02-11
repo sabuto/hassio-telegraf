@@ -143,6 +143,21 @@ if bashio::config.true 'ipmi_sensor.enabled'; then
   sed -i "s,TIMEOUT,${IPMI_TIMEOUT},g" $CONFIG
 fi
 
+if bashio::config.true 'thermal.enabled'; then
+  bashio::log.info "Updating config for thermal zone sensors"
+  for i in $(shopt -s nullglob; echo /sys/class/thermal/thermal_zone*); do
+    bashio::log.info "...$i"
+    name=$(basename "$i")
+    {
+      echo "[[inputs.file]]"
+      echo "  files = [\"$i/temp\"]"
+      echo "  name_override = \"$name\""
+      echo "  data_format = \"value\""
+      echo "  data_type = \"integer\""
+    } >> $CONFIG
+  done
+fi
+
 if bashio::config.true 'influxDBv2.enabled'; then
   bashio::log.info "Updating config for influxdbv2"
   {
