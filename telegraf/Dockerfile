@@ -17,7 +17,7 @@ RUN \
     && TELEGRAF="$TELEGRAF_VERSION" \
     && curl -J -L -o /tmp/telegraf.deb \
         "https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF}-1_${ARCH}.deb"
-    
+
     RUN dpkg --install /tmp/telegraf.deb \
     && rm -rf \
         /tmp/* \
