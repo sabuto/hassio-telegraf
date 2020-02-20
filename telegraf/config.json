@@ -1,6 +1,6 @@
 {
   "name": "Telegraf",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "slug": "hassio_telegraf",
   "description" : "An addon to add telegraf to hassio.",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
@@ -14,8 +14,13 @@
   "host_network": true,
   "host_pid": true,
   "apparmor": false,
+  "map": ["config:rw","ssl:rw","addons:rw","backup:rw","share:rw"],
   "full_access" : true,
   "options": {
+    "custom_conf": {
+      "enabled": false,
+      "location": "/share/telegraf.conf"
+    },
     "hostname" : "test",
     "influxDB" : {
       "enabled": true,
@@ -27,7 +32,7 @@
     },
     "swap" : {
       "enabled" : true
-    }, 
+    },
     "docker" : {
       "enabled" : false,
       "timeout" : "5s"
@@ -57,6 +62,10 @@
     }
   },
   "schema": {
+    "custom_conf": {
+      "enabled": "bool",
+      "location": "str"
+    },
     "hostname" : "str",
     "influxDB" : {
       "enabled": "bool",

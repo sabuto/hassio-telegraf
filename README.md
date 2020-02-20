@@ -44,6 +44,14 @@ Scroll down to Rob's Repo and install Telegraf. Give it a few minutes to install
 The config is simple but there are some things to consider,
 
 ```yaml
+custom_conf:
+  enabled: false
+  location: /share/telegraf.conf
+```
+
+This allows you to specify a custom configuration file so you can add things for yourself if this addon doesn't currently support it.
+
+```yaml
 hostname: ''
 ```
 This allows you set your hostname to something easy
@@ -83,13 +91,6 @@ docker:
 ```
 
 This monitors the docker containers
-
-```yaml
-thermal:
-  enabled: false
-```
-
-This allows you to monitor the temperature of the CPU
 
 ```yaml
 smart_monitor:

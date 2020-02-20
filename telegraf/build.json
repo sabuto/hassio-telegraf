@@ -6,7 +6,7 @@
         "i386": "homeassistant/i386-base-ubuntu:latest"
     },
     "args": {
-       "TELEGRAF_VERSION": "1.12.4"
+       "TELEGRAF_VERSION": "1.13.2"
    }
 }
 
