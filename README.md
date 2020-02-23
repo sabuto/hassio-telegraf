@@ -49,7 +49,7 @@ custom_conf:
   location: /share/telegraf.conf
 ```
 
-This allows you to specify a custom configuration file so you can add things for yourself if this addon doesn't currently support it.
+This allows you to specify a custom configuration file so you can add things for yourself if this addon doesn't currently support it. Please note this must be a full telegraf config file not just parts.
 
 ```yaml
 hostname: ''
