@@ -32,7 +32,7 @@ CUSTOM_CONF=$(bashio::config 'custom_conf.location')
 if bashio::var.true "${CUSTOM_CONF_ENABLED}"; then
   bashio::log.info "Using custom conf file"
   rm /etc/telegraf/telegraf.conf
-  cp "${CUSTOM_CONF}" /etc/telegraf/telegraf.conf
+  mv "${CUSTOM_CONF}" /etc/telegraf/telegraf.conf
 else
   bashio::log.info "Updating config"
 
