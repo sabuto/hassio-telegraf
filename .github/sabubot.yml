@@ -15,7 +15,6 @@ title-keyword-labels:
   bugfix: ["bug","bugfix","fix"]
   feature: ["feature"]
   enhancement: ["enhancement"]
-
-move-issues-to: bot-test2
+  
 delete_closed_pr: true
 help: false
