@@ -1,0 +1,21 @@
+settings:
+  add-owner-assignee: true
+  add-owner-reviewer: true
+  process-closed-issues: true
+  remove-labels: true
+  remove-keyword-labels: true
+  close-issues: true
+  move-issues: true
+  move-prs: false
+  move-labels: true
+
+title-keyword-labels:
+  in-progress: ["WiP"]
+  chore: ["chore"]
+  bugfix: ["bug","bugfix","fix"]
+  feature: ["feature"]
+  enhancement: ["enhancement"]
+
+move-issues-to: bot-test2
+delete_closed_pr: true
+help: false
