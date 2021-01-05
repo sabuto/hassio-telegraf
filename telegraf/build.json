@@ -6,7 +6,7 @@
         "i386": "homeassistant/i386-base-debian:buster"
     },
     "args": {
-       "TELEGRAF_VERSION": "1.13.2"
+       "TELEGRAF_VERSION": "1.17.0"
    }
 }
 
