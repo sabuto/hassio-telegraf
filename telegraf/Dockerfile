@@ -23,7 +23,7 @@ RUN \
         /tmp/* \
         /var/lib/apt/lists/*
 
-EXPOSE 8092/udp 8094 8125/udp
+EXPOSE 8092/udp 8094 8125/udp 9273/tcp
 
 COPY run.sh /
 RUN chmod a+x /run.sh
