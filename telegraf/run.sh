@@ -192,7 +192,7 @@ else
     } >> $CONFIG
 
     PROM_METRICS_PATH="$( bashio::config 'prometheus.metrics_path' )"
-    sed -i "s,PROM_METRICS_PORT,${PROM_METRICS_PATH},g" $CONFIG
+    sed -i "s,PROM_METRICS_PATH,${PROM_METRICS_PATH},g" $CONFIG
   fi
 
 fi
