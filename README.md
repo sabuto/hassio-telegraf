@@ -124,6 +124,13 @@ influxDBv2:
 
 This allows you to use InfluxDBv2 if you have an instance running.
 
+```yaml
+prometheus:
+  enabled: false
+  metrics_path: '/metrics'
+```
+This allows you to use the promethus output
+
 # Known issues
 
 ~~For some reason at the moment i have figured out how to communicate with the docker.sock therefore i cannot get the process' for docker contaisners. I will look into this and fix it when i can, if you have any idea please submit a PR~~
