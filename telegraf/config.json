@@ -59,6 +59,10 @@
       "organization": "",
       "token": "",
       "bucket": ""
+    },
+    "prometheus": {
+      "enabled": false,
+      "metrics_path": "/metrics"
     }
   },
   "schema": {
@@ -107,8 +111,14 @@
       "organization": "str",
       "token": "str",
       "bucket": "str"
+    },
+    "prometheus": {
+      "enabled": "bool",
+      "metrics_path": "str"
     }
   },
-  "ports" : {},
+  "ports" : {
+    "9273/tcp": 9273
+  },
   "image" : "sabuto/{arch}-hassio-telegraf"
 }

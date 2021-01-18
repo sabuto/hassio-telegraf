@@ -181,6 +181,20 @@ else
     sed -i "s,INFLUX_ORG,${INFLUXDBV2_ORG},g" $CONFIG
     sed -i "s,INFLUX_BUCKET,${INFLUXDBV2_BUCKET},g" $CONFIG
   fi
+
+  if bashio::config.true 'prometheus.enabled'; then
+    bashio::log.info "Updating config for prometheus client"
+    {
+      echo "[[outputs.prometheus_client]]"
+      echo "  listen = \":9273\""
+      echo "  path   = \"PROM_METRICS_PATH\""
+      echo "  metric_version = 2"
+    } >> $CONFIG
+
+    PROM_METRICS_PATH="$( bashio::config 'prometheus.metrics_path' )"
+    sed -i "s,PROM_METRICS_PATH,${PROM_METRICS_PATH},g" $CONFIG
+  fi
+
 fi
 
 bashio::log.info "Finished updating config, Starting Telegraf"
