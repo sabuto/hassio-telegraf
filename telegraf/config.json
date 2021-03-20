@@ -1,11 +1,11 @@
 {
   "name": "Telegraf",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "slug": "hassio_telegraf",
   "description" : "An addon to add telegraf to hassio.",
   "url" : "https://github.com/Sabuto/hassio-telegraf",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "startup": "before",
+  "startup": "application",
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
