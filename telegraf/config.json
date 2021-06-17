@@ -1,12 +1,19 @@
 {
   "name": "Telegraf",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "slug": "hassio_telegraf",
-  "description" : "An addon to add telegraf to hassio.",
-  "url" : "https://github.com/Sabuto/hassio-telegraf",
-  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "startup": "application",
-  "boot": "auto",
+  "description": "An addon to add telegraf to hassio.",
+  "url": "https://github.com/Sabuto/hassio-telegraf",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "init": false,
+  "startup": "services",
+  "boot": "manual",
   "hassio_api": true,
   "hassio_role": "default",
   "auth_api": true,
@@ -14,44 +21,53 @@
   "host_network": true,
   "host_pid": true,
   "apparmor": false,
-  "map": ["config:rw","ssl:rw","addons:rw","backup:rw","share:rw"],
-  "full_access" : true,
+  "map": [
+    "config:rw",
+    "ssl:rw",
+    "addons:rw",
+    "backup:rw",
+    "share:rw"
+  ],
+  "privileged": [
+    "SYS_ADMIN"
+  ],
+  "full_access": true,
   "options": {
     "custom_conf": {
       "enabled": false,
       "location": "/share/telegraf.conf"
     },
-    "hostname" : "test",
-    "influxDB" : {
+    "hostname": "test",
+    "influxDB": {
       "enabled": true,
       "url": "http://a0d7b954-influxdb:8086",
       "db": "telegraf"
     },
-    "kernel" : {
-      "enabled" : true
+    "kernel": {
+      "enabled": true
     },
-    "swap" : {
-      "enabled" : true
+    "swap": {
+      "enabled": true
     },
-    "docker" : {
-      "enabled" : false,
-      "timeout" : "5s"
+    "docker": {
+      "enabled": false,
+      "timeout": "5s"
     },
-    "thermal" : {
-      "enabled" : false
+    "thermal": {
+      "enabled": false
     },
-    "smart_monitor" : {
-      "enabled" : false,
-      "timeout" : "30s"
+    "smart_monitor": {
+      "enabled": false,
+      "timeout": "30s"
     },
     "ipmi_sensor": {
-      "enabled" : false,
-      "interval" : "30s",
-      "timeout" : "20s",
-      "server_user_id" : "user",
-      "server_password" : "password",
-      "server_protocol" : "lan",
-      "server_ip" : "192.168.1.2"
+      "enabled": false,
+      "interval": "30s",
+      "timeout": "20s",
+      "server_user_id": "user",
+      "server_password": "password",
+      "server_protocol": "lan",
+      "server_ip": "192.168.1.2"
     },
     "influxDBv2": {
       "enabled": false,
@@ -70,40 +86,40 @@
       "enabled": "bool",
       "location": "str"
     },
-    "hostname" : "str",
-    "influxDB" : {
+    "hostname": "str",
+    "influxDB": {
       "enabled": "bool",
       "url": "str",
       "db": "str",
-      "retention_policy" : "str?",
-      "username" : "str?",
-      "password" : "str?"
+      "retention_policy": "str?",
+      "username": "str?",
+      "password": "str?"
     },
-    "kernel" : {
-      "enabled" : "bool"
+    "kernel": {
+      "enabled": "bool"
     },
-    "swap" : {
-      "enabled" : "bool"
+    "swap": {
+      "enabled": "bool"
     },
-    "docker" : {
-      "enabled" : "bool",
-      "timeout" : "str"
+    "docker": {
+      "enabled": "bool",
+      "timeout": "str"
     },
-    "thermal" : {
-      "enabled" : "bool"
+    "thermal": {
+      "enabled": "bool"
     },
-    "smart_monitor" : {
-      "enabled" : "bool",
-      "timeout" : "str"
+    "smart_monitor": {
+      "enabled": "bool",
+      "timeout": "str"
     },
     "ipmi_sensor": {
-      "enabled" : "bool",
-      "interval" : "str",
-      "timeout" : "str",
-      "server_user_id" : "str",
-      "server_password" : "str",
-      "server_protocol" : "str",
-      "server_ip" : "str"
+      "enabled": "bool",
+      "interval": "str",
+      "timeout": "str",
+      "server_user_id": "str",
+      "server_password": "str",
+      "server_protocol": "str",
+      "server_ip": "str"
     },
     "influxDBv2": {
       "enabled": "bool",
@@ -117,8 +133,7 @@
       "metrics_path": "str"
     }
   },
-  "ports" : {
+  "ports": {
     "9273/tcp": 9273
-  },
-  "image" : "sabuto/{arch}-hassio-telegraf"
+  }
 }

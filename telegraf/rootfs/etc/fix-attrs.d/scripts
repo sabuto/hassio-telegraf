@@ -1,2 +1,3 @@
-/usr/bin/example1.sh false root 0755 0755
-/usr/bin/example2.sh false root 0755 0755
+﻿/etc/telegraf/telegraf.conf false root 0755 0755
+/usr/bin/tele.sh false root 0755 0755
+/usr/bin/telegraf.sh false root 0755 0755

@@ -5,6 +5,6 @@
 # ==============================================================================
 
 
-bashio::log.info "Starting Example1..."
+bashio::log.info "Starting Telegraf"
 
-exec /usr/bin/example1.sh
+exec telegraf
