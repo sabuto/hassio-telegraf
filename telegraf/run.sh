@@ -119,6 +119,7 @@ else
       echo "[[inputs.docker]]"
       echo "  endpoint = 'unix:///var/run/docker.sock'"
       echo "  timeout = 'DOCKER_TIMEOUT'"
+      echo "  docker_label_include = ['engine_host','container_image','container_name','container_status','container_version']"
     } >> $CONFIG
 
     sed -i "s,DOCKER_TIMEOUT,${DOCKER_TIMEOUT},g" $CONFIG
