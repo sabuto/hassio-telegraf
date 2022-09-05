@@ -68,6 +68,7 @@ else
   } >> $CONFIG
 
   sed -i "s,HOSTNAME,${HOSTNAME},g" $CONFIG
+  sed -i "s,AGENT_INTERVAL,${AGENT_INTERVAL},g" $CONFIG
 
   if bashio::config.true 'influxDB.enabled'; then
     if bashio::var.has_value "${INFLUX_UN}"; then
