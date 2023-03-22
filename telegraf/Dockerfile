@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:4.2.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:6.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -28,6 +28,15 @@ RUN \
 
 # Copy root filesystem
 COPY rootfs /
+
+RUN chown root /etc/cont-init.d/telegraf.sh
+RUN chown root /etc/telegraf/telegraf.conf
+RUN chown root /etc/services.d/telegraf/run
+RUN chown root /etc/services.d/telegraf/finish
+RUN chmod 775 /etc/cont-init.d/telegraf.sh
+RUN chmod 775 /etc/telegraf/telegraf.conf
+RUN chmod 775 /etc/services.d/telegraf/run
+RUN chmod 775 /etc/services.d/telegraf/finish
         
 EXPOSE 8092/udp 8094 8125/udp 9273/tcp
 
