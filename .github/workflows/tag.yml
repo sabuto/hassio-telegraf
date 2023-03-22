@@ -4,17 +4,22 @@ on: release
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
-      # - name: shellcheck
-      #   run: shellcheck telegraf/run.sh
+      - name: shellcheck
+        run: shellcheck telegraf/run.sh
       - name: build docker files
-        run: docker run --rm --privileged	-v /var/run/docker.sock:/var/run/docker.sock -v ~/.docker:/root/.docker -v "$(pwd)":/data homeassistant/amd64-builder	-t telegraf	--all	--test
-      - name: deploy docker files
-        if: github.event_name != 'pull_request'
-        run: docker run --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /home/travis/.docker:/root/.docker -v "$(pwd)":/data homeassistant/amd64-builder --target telegraf --all --release-tag --docker-user sabuto --docker-password ${{ secrets.DOCKER_PASSWORD }}
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --all \
+            --target telegraf \
+            --docker-hub sabuto \
+            --docker-user sabuto \
+            --docker-password ${{ secrets.DOCKER_PASSWORD }}
 
   push-config-to-main-repo:
     needs: build
