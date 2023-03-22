@@ -1,27 +1,14 @@
-﻿{
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
+{
   "version": "2.0.0",
   "tasks": [
     {
-      // # iptables -t nat -N DOCKER For when vscode complains at startup
       "label": "Start Home Assistant",
       "type": "shell",
-      "command": "./.devcontainer/supervisor.sh",
+      "command": "supervisor_run",
       "group": {
         "kind": "test",
-        "isDefault": true,
+        "isDefault": true
       },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "problemMatcher": []
-    },{
-      "label": "Run Home Assistant CLI",
-      "type": "shell",
-      "command": "docker exec -ti hassio_cli /usr/bin/cli.sh",
-      "group": "test",
       "presentation": {
         "reveal": "always",
         "panel": "new"

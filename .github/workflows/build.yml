@@ -13,4 +13,12 @@ jobs:
       - name: shellcheck
         run: shellcheck telegraf/run.sh
       - name: build docker files
-        run: docker run --rm --privileged	-v /var/run/docker.sock:/var/run/docker.sock -v ~/.docker:/root/.docker -v "$(pwd)":/data homeassistant/amd64-builder	-t telegraf	--all	--test
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --test \
+            --all \
+            --target telegraf \
+            --docker-hub sabuto \
+            --docker-user sabuto \
+            --docker-password ${{ secrets.DOCKER_PASSWORD }}
