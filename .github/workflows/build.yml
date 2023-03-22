@@ -19,3 +19,6 @@ jobs:
             --test \
             --all \
             --target telegraf
+            --docker-hub sabuto
+            --docker-user sabuto \
+            --docker-password ${{ secrets.DOCKER_PASSWORD }}

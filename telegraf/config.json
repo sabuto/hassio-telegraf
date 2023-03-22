@@ -134,5 +134,6 @@
   },
   "ports": {
     "9273/tcp": 9273
-  }
+  },
+  "image": "sabuto/{arch}-hassio-telegraf"
 }
