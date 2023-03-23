@@ -37,6 +37,9 @@
       "location": "/share/telegraf.conf"
     },
     "hostname": "test",
+    "telegraf_agent": {
+      "interval": "10s"
+    },
     "influxDB": {
       "enabled": true,
       "url": "http://a0d7b954-influxdb:8086",

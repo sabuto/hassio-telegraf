@@ -56,6 +56,11 @@ hostname: ''
 ```
 This allows you set your hostname to something easy
 
+```yaml
+interval: ''
+```
+This allows you to set the interval for telegraf to run in seconds.
+
 You must have a running influxDB instance (the hassio plugin works)
 
 ```yaml

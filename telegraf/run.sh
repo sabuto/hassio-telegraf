@@ -8,6 +8,7 @@ bashio::require.unprotected
 readonly CONFIG="/etc/telegraf/telegraf.conf"
 
 HOSTNAME=$(bashio::config 'hostname')
+AGENT_INTERVAL=$(bashio::config 'telegraf_agent.interval')
 INFLUX_SERVER=$(bashio::config 'influxDB.url')
 INFLUX_DB=$(bashio::config 'influxDB.db')
 INFLUX_UN=$(bashio::config 'influxDB.username')
@@ -42,9 +43,15 @@ else
     hostname=" hostname = ''"
   fi
 
+  if bashio::var.has_value "${AGENT_INTERVAL}"; then
+    agent_interval="interval = 'AGENT_INTERVAL'"
+  else
+    agent_interval=" interval = '10s'"
+  fi
+
   {
     echo "[agent]"
-    echo "  interval = \"10s\""
+    echo "  ${agent_interval}"
     echo "  round_interval = true"
     echo "  metric_batch_size = 1000"
     echo "  metric_buffer_limit = 10000"
@@ -57,6 +64,7 @@ else
   } >> $CONFIG
 
   sed -i "s,HOSTNAME,${HOSTNAME},g" $CONFIG
+  sed -i "s,AGENT_INTERVAL,${AGENT_INTERVAL},g" $CONFIG
 
   if bashio::config.true 'influxDB.enabled'; then
     if bashio::var.has_value "${INFLUX_UN}"; then
