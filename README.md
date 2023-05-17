@@ -60,7 +60,7 @@ You must have a running influxDB instance (the hassio plugin works)
 
 ```yaml
 influxDB:
-  enabled: true,
+  enabled: true
   url: 'http://a0d7b954-influxdb:8086'
   db: telegraf
   retention_policy: optional
